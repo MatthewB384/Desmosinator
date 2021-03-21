@@ -7,9 +7,6 @@ image_location = r'C:\Users\61490\Documents\Math\20210218_192347.jpg'
 image_height = 30
 image_width = 40
 
-window_height = 700
-window_width = 933
-
 frames_per_second = 40
 
 
@@ -45,9 +42,12 @@ import pygame
 from pygame.locals import *
 import pyperclip
 
+h = 700
+w = int(700*image_width/image_height)
+
 pygame.init()
 FramePerSec = pygame.time.Clock()
-displaysurface = pygame.display.set_mode((window_width, window_height))
+displaysurface = pygame.display.set_mode((w, h))
 pygame.display.set_caption("Desmos")
 
 class Screen:
@@ -125,12 +125,12 @@ class Screen:
         c = p1[1] - m * p1[0]
         x = [p1[0],p2[0]]
         maxx,minx = max(x),min(x)
-        eqs.append(rf'y={round(m,4)}x{["-","+"][c>=0]}{abs(round(c,4))}\left\{{{round(minx,2)}<x<{round(maxx,2)}\right\}}')
+        eqs.append(rf'y={round(m,4)}x{["-","+"][c>=0]}{abs(round(c,4))}\left\{{{round(minx,4)}<x<{round(maxx,4)}\right\}}')
       else:
         x = p1[0]
         y = (p1[1],p2[1])
         miny,maxy=min(y),max(y)
-        eqs.append(rf'x={round(x,2)}\left\{{{round(miny,2)}<y<{round(maxy,2)}\right\}}')
+        eqs.append(rf'x={round(x,2)}\left\{{{round(miny,4)}<y<{round(maxy,4)}\right\}}')
     return '\n'.join(eqs)
 
   def handle_keys(self):
@@ -152,7 +152,7 @@ class Screen:
     self.width = int(self.width * value)
     self.height = int(self.height * value)
     self.top_corner_coordinate[0] = int(self.top_corner_coordinate[0] * value)
-    self.top_corner_coordinate[1] = int(self.top_corner_coordinate[1] *  value)
+    self.top_corner_coordinate[1] = int(self.top_corner_coordinate[1] * value)
     self.size_surface()
 
   def blit(self, displaysurface):
@@ -166,7 +166,7 @@ class Screen:
 
       
       
-screen = Screen(window_width,window_height)
+screen = Screen(w, h)
 
 
 while 1:
