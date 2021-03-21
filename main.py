@@ -1,13 +1,30 @@
 #better desmos defeater
 
-#Stuff you need to worry about
-
-image_location = r'C:\Users\61490\Documents\Math\20210218_192347.jpg'
-
-image_height = 30
-image_width = 40
+mysetup = {}
 
 
+if not mysetup:
+  from tkinter import Tk
+  from tkinter.filedialog import askopenfilename
+  tk = Tk()
+  tk.withdraw()
+  print('Please choose your image\n')
+  mysetup['image_location'] = askopenfilename()
+  while 1:
+    try:
+      mysetup['image_width'] = int(input('Please enter the width of your image in desmos:\n'))
+      break
+    except ValueError:
+      print('Please enter a number, e.g. 40.\n')
+  print()
+  while 1:
+    try:
+      mysetup['image_height'] = int(input('Please enter the height of your image in desmos:\n'))
+      break
+    except ValueError:
+      print('Please enter a number, e.g. 30.\n')
+  print()
+      
 print('''
 INSTRUCTIONS:
 To move around, use WASD
@@ -24,13 +41,12 @@ Press C to copy all of the lines on the screen. These can be pasted
 straight into desmos
 ''')
 
-#Stuff you dont need to worry about
 import pygame
 from pygame.locals import *
-import pyperclip
+import pyperclip  
 
 h = 700
-w = int(700*image_width/image_height)
+w = int(700*mysetup['image_width']/mysetup['image_height'])
 
 pygame.init()
 FramePerSec = pygame.time.Clock()
@@ -41,8 +57,8 @@ class Screen:
   def __init__(self,width,height):
     self.width = width
     self.height = height
-    self.image_width = image_width
-    self.image_height = image_height
+    self.image_width = mysetup['image_width']
+    self.image_height = mysetup['image_height']
     self.top_corner_coordinate = [0,0]
     
     self.beginning_points = {}
@@ -57,7 +73,7 @@ class Screen:
     self.mode = 0
 
   def load_image(self):
-    self.surface = pygame.image.load(image_location)
+    self.surface = pygame.image.load(mysetup['image_location'])
     self.resetcounter = 0
 
 
@@ -153,12 +169,9 @@ class Screen:
       pygame.draw.circle(displaysurface,(255,255,0),(bp:=self.coordinate_to_pygame_point(*self.beginning_points[point])),1)
       if point in self.ending_points:
         pygame.draw.circle(displaysurface,(255,255,0),(ep:=self.coordinate_to_pygame_point(*self.ending_points[point])),1)
-        pygame.draw.line(displaysurface,(255,255,0),bp,ep,1)
-    
-      
+        pygame.draw.line(displaysurface,(255,255,0),bp,ep,1)    
       
 screen = Screen(w, h)
-
 
 while 1:
   keys = pygame.key.get_pressed()
