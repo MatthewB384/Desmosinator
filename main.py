@@ -8,7 +8,7 @@ image_height = 30
 image_width = 40
 
 
-'''
+print('''
 INSTRUCTIONS:
 To move around, use WASD
 To zoom in and out, use Q and E
@@ -18,21 +18,13 @@ The program will automatically sharpen the image every now and again, but
 to do it manually press X
 
 Click on two points to create a line between them
-Press Z to undo
+Press Z to undo. Press ctrl+Z to undo all.
 
 Press C to copy all of the lines on the screen. These can be pasted
 straight into desmos
-'''
-
-
-
-
-
-
+''')
 
 #Stuff you dont need to worry about
-
-
 import pygame
 from pygame.locals import *
 import pyperclip
@@ -109,6 +101,11 @@ class Screen:
     except Exception as e:
       pass
 
+  def delete_all_points(self):
+    self.mode = 0
+    self.beginning_points = {}
+    self.ending_points = {}
+
 
   def generate_equations(self):
     eqs = []
@@ -158,13 +155,14 @@ class Screen:
         pygame.draw.circle(displaysurface,(255,255,0),(ep:=self.coordinate_to_pygame_point(*self.ending_points[point])),1)
         pygame.draw.line(displaysurface,(255,255,0),bp,ep,1)
     
-
       
       
 screen = Screen(w, h)
 
 
 while 1:
+  keys = pygame.key.get_pressed()
+  
   for event in pygame.event.get():
     if event.type == QUIT:
       pygame.quit()
@@ -177,7 +175,10 @@ while 1:
       
     if event.type == KEYDOWN:
       if event.key == K_z:
-        screen.delete_last_point()
+        if keys[K_RCTRL] or keys[K_LCTRL]:
+          screen.delete_all_points()
+        else:
+          screen.delete_last_point()
 
       if event.key == K_c:
         pyperclip.copy(screen.generate_equations())
