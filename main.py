@@ -1,22 +1,25 @@
 #better desmos defeater
 
+def prompt_user_installation(name):
+  input(f'Please install {name}. Press enter for instructions for installation.')
+  input('''Press the windows key and R at the same time to open the run dialogue box.
+Type "cmd" then press enter to open command prompt. Press enter to continue.''')
+  input(f'''Type into command prompt the command "pip install {name}". {name}
+will be installed.''')
+  input('Press enter to exit the program.')
+  exit()
+    
 try:
   import pygame
 except Exception as e:
   print(e)
-  input('Please install pygame. Press enter for instructions for installation')
-  input('''Press the windows key and R at the same time to open the run dialogue box.
-Type "cmd" then press enter to open command prompt. Press enter to continue''')
-  input('''Type into command prompt the command "pip install pygame". Pygame will be installed''')
+  prompt_user_installation('pygame')
 from pygame.locals import *
 try:
   import pyperclip
 except Exception as e:
   print(e)
-  input('Please install pyperclip. Press enter for instructions for installation')
-  input('''Press the windows key and R at the same time to open the run dialogue box.
-Type "cmd" then press enter to open command prompt. Press enter to continue''')
-  input('''Type into command prompt the command "pip install pyperclip". Pyperclip will be installed''')
+  prompt_user_installation('pyperclip')
 
 mysetup = {}
 #mysetup = {
@@ -51,14 +54,11 @@ print('''
 INSTRUCTIONS:
 To move around, use WASD
 To zoom in and out, use Q and E
-
 When you zoom in and out, pygame compresses the image and it gets blurrier.
 The program will automatically sharpen the image every now and again, but
 to do it manually press X
-
 Click on two points to create a line between them
 Press Z to undo. Press ctrl+Z to undo all.
-
 Press C to copy all of the lines on the screen. These can be pasted
 straight into desmos
 ''')
