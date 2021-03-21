@@ -37,14 +37,14 @@ if not mysetup:
   mysetup['image_location'] = askopenfilename()
   while 1:
     try:
-      mysetup['image_width'] = int(input('Please enter the width of your image in desmos:\n'))
+      mysetup['image_width'] = float(input('Please enter the width of your image in desmos:\n'))
       break
     except ValueError:
       print('Please enter a number, e.g. 40.\n')
   print()
   while 1:
     try:
-      mysetup['image_height'] = int(input('Please enter the height of your image in desmos:\n'))
+      mysetup['image_height'] = float(input('Please enter the height of your image in desmos:\n'))
       break
     except ValueError:
       print('Please enter a number, e.g. 30.\n')
