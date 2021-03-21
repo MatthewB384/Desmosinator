@@ -7,11 +7,6 @@ image_location = r'C:\Users\61490\Documents\Math\20210218_192347.jpg'
 image_height = 30
 image_width = 40
 
-frames_per_second = 40
-
-
-
-
 
 '''
 INSTRUCTIONS:
@@ -197,4 +192,4 @@ while 1:
   screen.blit(displaysurface)
     
   pygame.display.update()
-  FramePerSec.tick(frames_per_second)
+  FramePerSec.tick(60)
