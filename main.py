@@ -1,7 +1,29 @@
 #better desmos defeater
 
-mysetup = {}
+try:
+  import pygame
+except Exception as e:
+  print(e)
+  input('Please install pygame. Press enter for instructions for installation')
+  input('''Press the windows key and R at the same time to open the run dialogue box.
+Type "cmd" then press enter to open command prompt. Press enter to continue''')
+  input('''Type into command prompt the command "pip install pygame". Pygame will be installed''')
+from pygame.locals import *
+try:
+  import pyperclip
+except Exception as e:
+  print(e)
+  input('Please install pyperclip. Press enter for instructions for installation')
+  input('''Press the windows key and R at the same time to open the run dialogue box.
+Type "cmd" then press enter to open command prompt. Press enter to continue''')
+  input('''Type into command prompt the command "pip install pyperclip". Pyperclip will be installed''')
 
+mysetup = {}
+#mysetup = {
+#  'image_location': r'C:\Users\61490\Documents\Math\20210218_192347.jpg',
+#  'image_height':30,
+#  'image_width':40,
+#}
 
 if not mysetup:
   from tkinter import Tk
@@ -41,9 +63,6 @@ Press C to copy all of the lines on the screen. These can be pasted
 straight into desmos
 ''')
 
-import pygame
-from pygame.locals import *
-import pyperclip  
 
 h = 700
 w = int(700*mysetup['image_width']/mysetup['image_height'])
