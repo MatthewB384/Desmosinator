@@ -22,11 +22,6 @@ except Exception as e:
   prompt_user_installation('pyperclip')
 
 mysetup = {}
-#mysetup = {
-#  'image_location': r'C:\Users\61490\Documents\Math\20210218_192347.jpg',
-#  'image_height':30,
-#  'image_width':40,
-#}
 
 if not mysetup:
   from tkinter import Tk
@@ -101,7 +96,6 @@ class Screen:
       self.load_image()
     self.surface = pygame.transform.scale(self.surface,(self.width,self.height))
     self.resetcounter += 1
-    
 
   def pygame_point_to_coordinate(self, pgx, pgy):
     x = self.image_width*(pgx-self.top_corner_coordinate[0])/self.width - (self.image_width/2)
@@ -120,10 +114,7 @@ class Screen:
     else:
       self.ending_points[len(self.ending_points)] = x,y
       self.mode = 0
-      
     
-      
-
   def delete_last_point(self):
     self.mode = 0
     last_point = max(map(len,(self.beginning_points,self.ending_points)))-1
@@ -140,7 +131,6 @@ class Screen:
     self.mode = 0
     self.beginning_points = {}
     self.ending_points = {}
-
 
   def generate_equations(self):
     eqs = []
@@ -188,7 +178,9 @@ class Screen:
       pygame.draw.circle(displaysurface,(255,255,0),(bp:=self.coordinate_to_pygame_point(*self.beginning_points[point])),1)
       if point in self.ending_points:
         pygame.draw.circle(displaysurface,(255,255,0),(ep:=self.coordinate_to_pygame_point(*self.ending_points[point])),1)
-        pygame.draw.line(displaysurface,(255,255,0),bp,ep,1)    
+        pygame.draw.line(displaysurface,(255,255,0),bp,ep,1) 
+        
+        
       
 screen = Screen(w, h)
 
